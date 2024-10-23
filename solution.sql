@@ -1,4 +1,0 @@
--- Active: 1729604035783@@127.0.0.1@5432@ph
-CREATE DATABASE ph;
-
-CREATE Table 

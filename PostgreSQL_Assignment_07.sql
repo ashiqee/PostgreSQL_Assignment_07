@@ -1,3 +1,4 @@
+-- Active: 1729489816636@@127.0.0.1@5432@university_db
 
 
 
@@ -28,6 +29,15 @@ CREATE TABLE courses(
     course_name VARCHAR(100) NOT NULL,
     credits INT NOT NULL
 );
+
+INSERT INTO courses (course_id, course_name, credits)
+VALUES 
+(1, 'Next.js', 3),
+(2, 'React.js', 4),
+(3, 'Databases', 3),
+(4, 'Prisma', 3);
+
+
 -- mistake spelling courses for drop course
 DROP TABLE course
 
@@ -42,6 +52,10 @@ CREATE TABLE enrollment(
     FOREIGN KEY (student_id) REFERENCES students(student_id),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
 );
+
+
+INSERT INTO enrollment (enrollment_id,student_id,course_id)
+VALUES(1,1,1),(2,1,2),(3,2,1),(4,3,2);
 
 SELECT * FROM enrollment;
 
@@ -68,6 +82,14 @@ INSERT into students VALUES(8,'Ashiqe',28,'ashiqe@gmail.com',50,49,NULL);
 
 
 -- Query 2 Start --
+
+-- Retrieve the names of all students who are enrolled in the course titled 'Next.js'.
+
+SELECT s.student_name
+FROM students s 
+JOIN enrollment e ON s.student_id = e.student_id
+JOIN courses c ON e.course_id = c.course_id
+WHERE c.course_name = 'Next.js'
 
 -- Query 2 End --
 
