@@ -67,3 +67,64 @@ JOIN courses ON enrollment.course_id = courses.course_id;
 ```
 
 
+
+
+## 9. Explain the GROUP BY clause and its role in aggregation operations.
+
+**Answer**:  
+The GROUP BY clause in PostgreSQL groups rows that have the same values in specified columns and is typically used with aggregate functions (e.g., COUNT, SUM, AVG, etc.). It allows you to perform calculations for each group separately.
+
+Example:
+```sql
+SELECT course_id, COUNT(student_id) AS students_enrolled
+FROM enrollment
+GROUP BY course_id;
+```
+
+
+## 10. How can you calculate aggregate functions like COUNT, SUM, and AVG in PostgreSQL?
+**Answer**:  
+In PostgreSQL, aggregate functions perform calculations on a set of values and return a single result. Common aggregate functions include:
+
+- COUNT: Counts the number of rows.
+- SUM: Adds up values in a numeric column.
+- AVG: Returns the average value of a numeric column.
+
+Example:
+
+```sql
+-- Count :
+SELECT COUNT(*) FROM students;
+
+-- SUM:
+SELECT SUM(credits) FROM courses;
+
+-- Average:
+SELECT AVG(age) FROM students;
+```
+
+## 11. What is the purpose of an index in PostgreSQL, and how does it optimize query performance?
+**Answer**:  
+An index in PostgreSQL improves query performance by allowing the database to locate rows faster without scanning the entire table. It acts like a pointer to where the data resides, reducing the time needed for retrieval. Indexes are especially useful for speeding up SELECT queries that filter on indexed columns.
+
+Example:
+```sql
+CREATE INDEX idx_students_email ON students(email);
+```
+
+
+## 12. Explain the concept of a PostgreSQL view and how it differs from a table.
+**Answer**:  
+A view in PostgreSQL is a virtual table that is created from a SQL query. Unlike a regular table, a view does not store data itself. Instead, it provides a way to look at data from one or more tables in a specific format or filter.
+
+- Table: Stores actual data and allows modifications like INSERT, UPDATE, and DELETE.
+- View: Is a saved query result that does not store data and is read-only unless specifically designed to be updatable.
+
+Example:
+```sql
+CREATE VIEW student_courses AS
+SELECT students.student_name, courses.course_name
+FROM students
+JOIN enrollment ON students.student_id = enrollment.student_id
+JOIN courses ON enrollment.course_id = courses.course_id;
+```
